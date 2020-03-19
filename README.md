@@ -1,4 +1,4 @@
-# LSTM-training
+# DeepLearningTraining
 A model of deep learning using the Keras library
 
 Sentiment analysis of IMDB reviews:
