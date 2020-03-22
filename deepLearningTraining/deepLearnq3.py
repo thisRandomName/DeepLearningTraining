@@ -12,7 +12,7 @@ from keras.layers import Dense, Embedding
 from keras.layers import LSTM
 
 from sklearn.model_selection import train_test_split
-import statistics
+
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
@@ -59,9 +59,9 @@ def format_data(train, test, max_features, maxlen):
 
     return X, Y, test_X
 
-# Here we split data to training and testing parts
+# format data (both train and test)
 X, Y, test_X = format_data(train, test, max_features, maxlen)
-
+# Here we split  train data to training and testing parts (for the training process)
 X_train, X_val, Y_train, Y_val = train_test_split(X, Y, test_size=0.25, random_state=13)
 
 
@@ -71,11 +71,11 @@ model.add(Embedding(max_features, 128))
 model.add(LSTM(128, dropout=0.2, recurrent_dropout=0.2))
 model.add(Dense(2, activation='sigmoid'))
 
-
+#compile model
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
-
+#train the model
 print('Train...')
 model.fit(X_train, Y_train,
           batch_size=batch_size,
@@ -85,8 +85,8 @@ model.fit(X_train, Y_train,
 score, acc = model.evaluate(X_val, Y_val,
                             batch_size=batch_size)
 
-# print('Test score:', score)
-print('Test accuracy:', acc)
+# print('score:', score)
+print('Accuracy:', acc)
 
 
 #make predictions
